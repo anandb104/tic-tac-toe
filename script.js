@@ -42,11 +42,13 @@ let game=(function(){
         let success=board.setboard(index,currentplayer.marker);
         if(!success){
             if(filled==true){
-                console.log("The game is tied.Reset to start the game again.")
+                console.log("The game is tied.Reset to start the game again.");
+                return false;
             }
             else{
             console.log("Invalid Index!A marker already exists");
             switchplayer();
+            return false;
             }
         }
         else{
@@ -105,16 +107,20 @@ let game=(function(){
             console.log('The game is Tied.Press Reset to restart the game');
         }
     }
-    if(truthcol==false && truthrow==false)
+    if(truthcol==false && truthrow==false){
         switchplayer();
+    return true;
+    }
    else{
     console.log(`${currentplayer.name} has won already!! Reset to Start a new game.`);
+    return falsel
 }
     }
     return{play,Currentplayer};
 })();
 
 function dom(){
+    let board=gameboard;
     let gamer=game;
     let cells=[
     document.getElementById("index-0"),
@@ -133,23 +139,24 @@ function dom(){
     return {setdom};
 }
 let display=dom();
-game.play(0);
+if(game.play(0));
 display.setdom(0);
-game.play(2);
+if(game.play(2));
 display.setdom(2);
-game.play(6);
+if(game.play(6));
 display.setdom(6);
-game.play(3);
+if(game.play(3));
 display.setdom(3);
-game.play(8);
+if(game.play(8));
 display.setdom(8);
-game.play(4);
+if(game.play(4));
 display.setdom(4);
-game.play(5);
+if(game.play(5));
 display.setdom(5);
-game.play(7);
+if(game.play(7));
 display.setdom(7);
-game.play(1);
+if(game.play(1));
 display.setdom(1);
-game.play(1);
+if(game.play(1));
+display.setdom(1);
 
