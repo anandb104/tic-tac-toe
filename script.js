@@ -22,6 +22,7 @@ function player(name,marker){
 let game=(function(){
     let truthrow=false;
     let truthcol=false;
+    let truthdiagonal=false;
     let filled=false;
     let board=gameboard;
     let player1=player("random","X");
@@ -47,7 +48,6 @@ let game=(function(){
             }
             else{
             console.log("Invalid Index!A marker already exists");
-            switchplayer();
             return false;
             }
         }
@@ -67,7 +67,7 @@ let game=(function(){
              if(truth==true){
                 console.log(`${currentplayer.name} has won`);
                 truthrow=true;
-                break;
+                return true;
              }
         }
        if(truthrow==false){
@@ -85,7 +85,39 @@ let game=(function(){
          if(truth==true){
             console.log(`${currentplayer.name} has won`);
             truthcol=true;
-            break;
+            return true;
+         }
+    }
+    if(truthrow==false && truthcol==false){
+        let truth=true;
+        for(let i=0;i<=1;i++){
+            if((board.getboard(i,2-i)==board.getboard(2-i,i)) && (board.getboard(i,2-i)!="")){
+                truth=true;
+            }
+            else{
+                truth=false;
+                break;
+            }
+         }
+         if(truth==true){
+            console.log(`${currentplayer.name} has won`);
+            truthdiagonal=true;
+            return true;
+         }
+          truth=true;
+         for(let i=0;i<=1;i++){
+            if((board.getboard(i,i)==board.getboard(i+1,i+1)) && (board.getboard(i,i)!="")){
+                truth=true;
+            }
+            else{
+                truth=false;
+                break;
+            }
+         }
+         if(truth==true){
+            console.log(`${currentplayer.name} has won`);
+            truthdiagonal=true;
+            return true;
          }
     }
         }
@@ -103,60 +135,42 @@ let game=(function(){
                 break;
             }
         }
-        if(filled==true){
+        if((filled==true) &&(truthcol==false && truthrow==false)){
             console.log('The game is Tied.Press Reset to restart the game');
         }
     }
-    if(truthcol==false && truthrow==false){
-        switchplayer();
+    if(truthcol==false && truthrow==false && truthdiagonal==false){
+    switchplayer();
     return true;
     }
    else{
     console.log(`${currentplayer.name} has won already!! Reset to Start a new game.`);
-    return falsel
-}
+    return false;
+       }
     }
     return{play,Currentplayer};
 })();
 
 function dom(){
-    let board=gameboard;
     let gamer=game;
     let cells=[
     document.getElementById("index-0"),
     document.getElementById("index-1"),
-   document.getElementById("index-2"),
+    document.getElementById("index-2"),
     document.getElementById("index-3"),
     document.getElementById("index-4"),
-   document.getElementById("index-5"),
+    document.getElementById("index-5"),
     document.getElementById("index-6"),
     document.getElementById("index-7"),
     document.getElementById("index-8"),
     ];
-    function setdom(index){
-        cells[index].textContent=`${gamer.Currentplayer().marker}`;
-    }
-    return {setdom};
+cells.forEach((element,index)=>{
+    element.addEventListener("click",()=>{
+        let current=gamer.Currentplayer();
+        if(gamer.play(index))
+        element.textContent=`${current.marker}`;
+    })
+})
 }
-let display=dom();
-if(game.play(0));
-display.setdom(0);
-if(game.play(2));
-display.setdom(2);
-if(game.play(6));
-display.setdom(6);
-if(game.play(3));
-display.setdom(3);
-if(game.play(8));
-display.setdom(8);
-if(game.play(4));
-display.setdom(4);
-if(game.play(5));
-display.setdom(5);
-if(game.play(7));
-display.setdom(7);
-if(game.play(1));
-display.setdom(1);
-if(game.play(1));
-display.setdom(1);
+dom();
 
