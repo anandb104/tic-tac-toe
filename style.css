@@ -16,9 +16,48 @@
     font-weight: bold;
 }
 body{
+    background-color: lightgray;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    justify-content: space-between;
     align-items: center;
     margin: 0px;
     height:100vh;
+}
+#ttt{
+    height:40px;
+    width:40px;
+}
+.header{
+    background-color:black;
+    color:white;
+    font-size:32px;
+    width:100vw;
+    display:flex;
+    gap:16px;
+    justify-content: center;
+    align-items: center;
+    height:8rem;
+}
+.footer{
+    background-color:black;
+    color:white;
+    font-size:32px;
+    width:100vw;
+    display:flex;
+    gap:16px;
+    justify-content: center;
+    align-items: center;
+    height:8rem;
+}
+#git-btn{
+    height:40px;
+    width:40px;
+    border-radius: 50%;
+    padding: 0px;
+}
+#git{
+    height:40px;
+    width:40px;
+    border-radius: 50%;
 }

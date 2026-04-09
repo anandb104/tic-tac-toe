@@ -52,6 +52,10 @@ let game=(function(){
             }
         }
         else{
+            if(truthcol==true||truthdiagonal==true||truthrow==true){
+                console.log(`${currentplayer.name} has won already!! Reset to Start a new game.`);
+                return false;
+                   }
         console.log(`${currentplayer.name} played ${currentplayer.marker} at row=${Math.floor(index/3)} and col=${index%3}`);
             for(let i=0;i<=2;i++){
                 let truth=true;
@@ -127,16 +131,13 @@ let game=(function(){
         }
         if((filled==true) &&(truthcol==false && truthrow==false)){
             console.log('The game is Tied.Press Reset to restart the game');
+            return false;
         }
     }
     if(truthcol==false && truthrow==false && truthdiagonal==false){
     switchplayer();
     return true;
     }
-   else{
-    console.log(`${currentplayer.name} has won already!! Reset to Start a new game.`);
-    return false;
-       }
     }
     return{play,Currentplayer};
 })();
