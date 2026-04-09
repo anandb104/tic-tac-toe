@@ -89,17 +89,7 @@ let game=(function(){
          }
     }
     if(truthrow==false && truthcol==false){
-        let truth=true;
-        for(let i=0;i<=1;i++){
-            if((board.getboard(i,2-i)==board.getboard(2-i,i)) && (board.getboard(i,2-i)!="")){
-                truth=true;
-            }
-            else{
-                truth=false;
-                break;
-            }
-         }
-         if(truth==true){
+         if((board.getboard(0,2)==board.getboard(1,1))&&(board.getboard(1,1)==board.getboard(2,0))&&(board.getboard(0,2)!="")){
             console.log(`${currentplayer.name} has won`);
             truthdiagonal=true;
             return true;
