@@ -25,8 +25,9 @@ let game=(function(){
     let truthdiagonal=false;
     let filled=false;
     let board=gameboard;
-    let player1=player("random","X");
-    let player2=player("computer","O");
+    let playerdet=filldetails();
+    let player1=player(playerdet.p1name,playerdet.p1marker);
+    let player2=player(playerdet.p2name,playerdet.p2marker);
     let currentplayer=player1;
     function Currentplayer(){
         return currentplayer;
@@ -131,7 +132,7 @@ let game=(function(){
         }
         if((filled==true) &&(truthcol==false && truthrow==false)){
             console.log('The game is Tied.Press Reset to restart the game');
-            return false;
+            return true;
         }
     }
     if(truthcol==false && truthrow==false && truthdiagonal==false){
