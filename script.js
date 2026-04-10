@@ -50,18 +50,18 @@ let game=(function(){
         let success=board.setboard(index,currentplayer.marker);
         if(!success){
             if(filled==true){
-                console.log("The game is tied.Reset to start the game again.");
-                return false;
+               result.textContent="The game is tied.Reset to start the game again.";
+                return "invalid";
             }
             else{
             console.log("Invalid Index!A marker already exists");
-            return false;
+            return "invalid";
             }
         }
         else{
             if(truthcol==true||truthdiagonal==true||truthrow==true){
                 console.log(`${currentplayer.name} has won already!! Reset to Start a new game.`);
-                return false;
+                return "invalid";
                    }
         console.log(`${currentplayer.name} played ${currentplayer.marker} at row=${Math.floor(index/3)} and col=${index%3}`);
             for(let i=0;i<=2;i++){
@@ -78,7 +78,7 @@ let game=(function(){
              if(truth==true){
                 console.log(`${currentplayer.name} has won`);
                 truthrow=true;
-                return true;
+                return "win";
              }
         }
        if(truthrow==false){
@@ -96,14 +96,14 @@ let game=(function(){
          if(truth==true){
             console.log(`${currentplayer.name} has won`);
             truthcol=true;
-            return true;
+            return "win";
          }
     }
     if(truthrow==false && truthcol==false){
          if((board.getboard(0,2)==board.getboard(1,1))&&(board.getboard(1,1)==board.getboard(2,0))&&(board.getboard(0,2)!="")){
             console.log(`${currentplayer.name} has won`);
             truthdiagonal=true;
-            return true;
+            return "win";
          }
           truth=true;
          for(let i=0;i<=1;i++){
@@ -118,7 +118,7 @@ let game=(function(){
          if(truth==true){
             console.log(`${currentplayer.name} has won`);
             truthdiagonal=true;
-            return true;
+            return "win";
          }
     }
         }
@@ -138,12 +138,12 @@ let game=(function(){
         }
         if((filled==true) &&(truthcol==false && truthrow==false)){
             console.log('The game is Tied.Press Reset to restart the game');
-            return true;
+            return "tied";
         }
     }
     if(truthcol==false && truthrow==false && truthdiagonal==false){
     switchplayer();
-    return true;
+    return "continue";
     }
     }
     return{play,Currentplayer,playername};
@@ -169,11 +169,20 @@ function dom(){
     p1name.textContent=`${p.player1.name}`;
     p2name.textContent=`${p.player2.name}`;
    let name=document.getElementById("name-wrapper");
+   let result=document.getElementById("result");
+   
 cells.forEach((element,index)=>{
     element.addEventListener("click",()=>{
         let current=gamer.Currentplayer();
-        if(gamer.play(index))
+        let status=gamer.play(index);
+        if(status!="invalid")
         element.textContent=`${current.marker}`;
+    if(status=="win"){
+        result.textContent=`${current.name} has won`;
+    }
+    else if(status=="tied"){
+        result.textContent=`The match has tied`;
+    }
         if(current.name==p.player1.name){
             p1name.style.border='3px solid green';
             p2name.style.border='0px solid green';
