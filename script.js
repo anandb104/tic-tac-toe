@@ -25,10 +25,16 @@ let game=(function(){
     let truthdiagonal=false;
     let filled=false;
     let board=gameboard;
-    let playerdet=filldetails();
-    let player1=player(playerdet.p1name,playerdet.p1marker);
-    let player2=player(playerdet.p2name,playerdet.p2marker);
+    let p1name=localStorage.getItem("p1name");
+    let p2name=localStorage.getItem("p2name");
+    let p1marker=localStorage.getItem("p1marker");
+    let p2marker=localStorage.getItem("p2marker");
+    let player1=player(p1name,p1marker);
+    let player2=player(p2name,p2marker);
     let currentplayer=player1;
+    function playername(){
+        return{player1,player2};
+    }
     function Currentplayer(){
         return currentplayer;
     }
@@ -140,11 +146,13 @@ let game=(function(){
     return true;
     }
     }
-    return{play,Currentplayer};
+    return{play,Currentplayer,playername};
 })();
 
 function dom(){
     let gamer=game;
+    let p=gamer.playername();
+    let currentplayer=gamer.Currentplayer();
     let cells=[
     document.getElementById("index-0"),
     document.getElementById("index-1"),
@@ -156,13 +164,27 @@ function dom(){
     document.getElementById("index-7"),
     document.getElementById("index-8"),
     ];
+    let p1name=document.getElementById("p1-name");
+    let p2name=document.getElementById("p2-name");
+    p1name.textContent=`${p.player1.name}`;
+    p2name.textContent=`${p.player2.name}`;
+   let name=document.getElementById("name-wrapper");
 cells.forEach((element,index)=>{
     element.addEventListener("click",()=>{
         let current=gamer.Currentplayer();
         if(gamer.play(index))
         element.textContent=`${current.marker}`;
-    })
-})
+        if(current.name==p.player1.name){
+            p1name.style.border='3px solid green';
+            p2name.style.border='0px solid green';
+            }
+        else{
+                p1name.style.border='0px solid green';
+                p2name.style.border='3px solid green';
+            }
+    });
+});
+
 }
 dom();
 

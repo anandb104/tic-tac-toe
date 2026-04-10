@@ -3,7 +3,7 @@ let details=document.getElementById("details");
 details.innerHTML = `
 <div class='input-div'>
 <label for='p1marker'>Enter Player 1's marker:</label>
-<select id='p1marker' name='p1marker'>
+<select id='p1marker' name='p1marker' onchange='updatep2()'>
 <option value='X'>X</option>
 <option value='O'>O</option>
 </select>
@@ -18,7 +18,7 @@ details.innerHTML = `
 <label for='p2marker'>Enter Player 2's marker:</label>
 <select id='p2marker' name='p2marker'>
 <option value='X'>X</option>
-<option value='O'>O</option>
+<option value='O' selected>O</option>
 </select>
 </div>
 
@@ -27,7 +27,7 @@ details.innerHTML = `
 <input type='text' id='p2name'>
 </div>
 <div class='input-div'>
-<button onclick="window.location.href='index.html'" id='submit'>Submit</button>
+<button onclick="startgame()" id='submit'>Submit</button>
 </div>
 `;
 }
@@ -61,5 +61,20 @@ function filldetails(){
     return{p1name,p2name,p1marker,p2marker};
 }
 function startgame(){
-    
+    let det=filldetails();
+localStorage.setItem("p1name",det.p1name);
+localStorage.setItem("p1marker",det.p1marker);
+localStorage.setItem("p2name",det.p2name);
+localStorage.setItem("p2marker",det.p2marker);
+window.location.href='index.html';
+}
+function updatep2(){
+let p1marker=document.getElementById("p1marker").value;
+let p2marker=document.getElementById("p2marker")
+if(p1marker=='X'){
+p2marker.value='O';
+}
+else{
+    p2marker.value='X';
+}
 }
