@@ -66,7 +66,7 @@ localStorage.setItem("p1name",det.p1name);
 localStorage.setItem("p1marker",det.p1marker);
 localStorage.setItem("p2name",det.p2name);
 localStorage.setItem("p2marker",det.p2marker);
-window.location.href='index.html';
+window.location.href='mode.html';
 }
 function updatep2(){
 let p1marker=document.getElementById("p1marker").value;

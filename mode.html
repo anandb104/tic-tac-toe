@@ -3,9 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="mode-style.css">
-    <link rel="icon" type="image/x-icon" href="images/icon.png">
     <script src="mode-script.js" defer></script>
+    <script src="script.js" defer></script>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/x-icon" href="images/icon.png">
     <title>Tic-Tac-Toe</title>
 </head>
 <body>
@@ -13,21 +14,31 @@
         Tic-Tac-Toe
         <img id="ttt" src="./images/icon.png" alt="Image of tic tac toe">
     </div>
-<div id="details"></div>
-    <div class="choose-wrapper">
-        Choose Your Mode!
-        <div class="choose">
-            <div class="two-player">
-           <a onclick="filldetailsfortwoplayer()"><img id="two" src="./images/two-player.png">Two-player Mode</a>
-            </div>
-            <div class="single-player">
-            <a onclick="filldetailsforsingleplayer()"><img id="one" src="./images/single-player.png">Single Player Mode</a>  
-            </div>
+    <div id="name-wrapper">
+        <div id="p1-name">
+
         </div>
-</div>
-     <div class="footer">
+        <div id="p2-name">
+
+        </div>
+    </div>
+    <div class="table-wrapper">
+        <div class="table" id="index-0"></div>
+        <div class="table" id="index-1"></div>
+        <div class="table" id="index-2"></div>
+        <div class="table" id="index-3"></div>
+        <div class="table" id="index-4"></div>
+        <div class="table" id="index-5"></div>
+        <div class="table" id="index-6"></div>
+        <div class="table" id="index-7"></div>
+        <div class="table" id="index-8"></div>
+    </div>
+    <div id="result">
+        
+    </div>
+    <div class="footer">
      Created by Anand
-     <a href="www.github.com/anandb104"><img id="git" src="images/github-logo.png" alt='logo and link of github'></a>
+     <a href="https://github.com/anandb104"><img id="git" src="images/github-logo.png" alt='logo and link of github'></a>
     </div>
 </body>
 </html>
